@@ -15,7 +15,9 @@ function sendEmail() {
     let status;
     let [Name, Email, Salary] = values[i];
 
-    if (Email) {
+    if (!Email) {
+      status = "No Email Provided";
+    } else {
       try {
         let msg = buildMessage(Name, Salary);
         MailApp.sendEmail(Email, "Salary for Month of May", msg);
@@ -24,8 +26,6 @@ function sendEmail() {
         console.log(err);
         status = "Failed";
       }
-    } else {
-      status = "No Email Provided";
     }
 
     let cell = range.getCell(i + 1, 4);
