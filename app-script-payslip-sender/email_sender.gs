@@ -13,14 +13,15 @@ function sendEmail() {
 
   for (let i = 0; i < values.length; i++) {
     let status;
-    let [Name, Email, Salary] = values[i];
+    let [name, email, salary] = values[i];
 
-    if (!Email) {
+    if (!email) {
       status = "No Email Provided";
     } else {
       try {
-        let msg = buildMessage(Name, Salary);
-        MailApp.sendEmail(Email, "Salary for Month of May", msg);
+        let msg = buildMessage(name, salary);
+
+        MailApp.sendEmail(email, "Salary for Month of May", msg);
         status = "Success";
       } catch (err) {
         console.log(err);
@@ -28,7 +29,7 @@ function sendEmail() {
       }
     }
 
-    let cell = range.getCell(i + 1, 4);
+    let cell = sheet.getRange(i + 2, 4);
     cell.setValue(status);
   }
 }
